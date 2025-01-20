@@ -1,8 +1,7 @@
 'use client'
 
 import styled from 'styled-components'
-import { House } from 'lucide'
-export const Wrapper = styled.main`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -14,6 +13,13 @@ export const Wrapper = styled.main`
 export const ImageWrapper = styled(Wrapper)`
   box-shadow: none;
   align-items: center;
+`
+
+export const DetailsWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 `
 
 export const Image = styled.img`
@@ -39,10 +45,16 @@ export const ProductPrice = styled.span`
 export const Link = styled.a`
   display: flex;
   gap: 5px;
-  margin-bottom: 10px;
   font-size: medium;
   font-weight: 500;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
+  text-overflow: ellipsis;
+
+  &:visited {
+    color: black;
+  }
 
   &:hover {
     color: green;
@@ -58,5 +70,17 @@ export const ExternalLinkIcon = styled.span`
     width: 100%;
     height: 100%;
     stroke-width: 3px;
+  }
+`
+
+export const RemoveProductIcon = styled.span`
+  width: 24px;
+  height: 24px;
+  color: red;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 `

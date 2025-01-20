@@ -1,5 +1,6 @@
 'use client'
 
+import Button from '@/components/Button'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -49,7 +50,7 @@ export const SearchInput = styled.input`
   }
 `
 
-export const AddButton = styled.button`
+export const AddButton = styled(Button)`
   padding: 13px;
   width: 50%;
   max-width: 160px;

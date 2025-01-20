@@ -1,22 +1,36 @@
-import { ExternalLink } from 'lucide'
+import { ExternalLink, XCircle } from 'lucide'
 import React from 'react'
 import * as S from './styles'
 import { useRenderIconFromNode } from '@/hooks/useRenderIconFromNode'
+import { removeProduct } from '@/api/controllers/product'
 
-const ProductCard = () => {
+interface ProductCardProps {
+  id: string
+  name: string
+  imageUrl: string
+  productUrl: string
+  price: string
+}
+
+const ProductCard = ({ props }: { props: ProductCardProps }) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper key={props.id}>
       <S.ImageWrapper>
-        <S.Image src="/img/asus-4060.jpg" />
+        <S.Image src={props.imageUrl} />
       </S.ImageWrapper>
-      <S.Title>ASUS Dual GeForce RTX 4060 EVO OC Edition 8 GB GDDR6</S.Title>
-      <S.ProductPrice>R$ 2.499,90</S.ProductPrice>
-      <S.Link>
-        Visitar site
-        <S.ExternalLinkIcon>
-          {useRenderIconFromNode(ExternalLink)}
-        </S.ExternalLinkIcon>
-      </S.Link>
+      <S.Title>{props.name}</S.Title>
+      <S.ProductPrice>{props.price}</S.ProductPrice>
+      <S.DetailsWrapper>
+        <S.Link href={props.productUrl} target="_blank">
+          Visitar site
+          <S.ExternalLinkIcon>
+            {useRenderIconFromNode(ExternalLink)}
+          </S.ExternalLinkIcon>
+        </S.Link>
+        <S.RemoveProductIcon onClick={() => removeProduct(props.id)}>
+          {useRenderIconFromNode(XCircle)}
+        </S.RemoveProductIcon>
+      </S.DetailsWrapper>
     </S.Wrapper>
   )
 }
