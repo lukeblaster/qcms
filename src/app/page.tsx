@@ -6,6 +6,7 @@ import ProductContainer from '@/components/ProductContainer'
 import Button from '@/components/Button'
 import { addProduct } from '@/api/controllers/product'
 import Form from 'next/form'
+import FinalPrice from '@/components/FinalPrice'
 
 export default function Home() {
   return (
@@ -16,12 +17,13 @@ export default function Home() {
         </S.Title>
 
         <S.Div $column>
-          <Form action={addProduct}>
+          <Form action={addProduct} style={{ width: '100%' }}>
             <S.SearchBoxContainer>
               <S.SearchInput
                 type="text"
                 name="urlProduct"
                 placeholder="Digite ou cole o link do produto"
+                required
               />
               <Button>{useRenderIconFromNode(PlusCircle)} Adicionar</Button>
             </S.SearchBoxContainer>
@@ -32,7 +34,8 @@ export default function Home() {
         <ProductContainer />
 
         <S.ContentContainer>
-          <S.Title>Total: R$ 9.999,60</S.Title>
+          <S.Title>Total</S.Title>
+          <FinalPrice />
         </S.ContentContainer>
       </S.ContentContainer>
     </S.Container>

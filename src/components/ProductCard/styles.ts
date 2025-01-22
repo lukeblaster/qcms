@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 6px;
   max-width: 220px;
+  max-height: 450px;
   border-radius: 12px;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.25);
   padding: 0px 10px;
@@ -27,13 +28,20 @@ export const Image = styled.img`
   height: 220px;
   margin-bottom: 10px;
 `
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
-export const Title = styled.p`
+export const Title = styled.span`
   font-weight: 600;
   font-size: 14px;
-  line-height: 16px;
-  text-align: left;
-  max-width: 190px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const ProductPrice = styled.span`

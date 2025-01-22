@@ -4,7 +4,7 @@ import { getProductInfo } from '../services/getProductInfo'
 export type Product = {
   id: string
   name: string
-  price: string
+  price: number
   productUrl: string
   imageUrl: string
 }
@@ -39,4 +39,14 @@ export const removeProduct = async (id: string) => {
 
   // Disparar evento personalizado para notificar a atualização
   window.dispatchEvent(new Event('localStorageUpdated'))
+}
+
+export const fetchProductInfo = async (url: string, method: string) => {
+  if (method == 'amazon') {
+    const productInfo = await getProductInfo(url)
+
+    return productInfo
+  }
+
+  return []
 }

@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react'
 import * as S from './styles'
 import ProductCard from '../ProductCard'
+import ProductBox from '../ProductBox'
+import { calculateProductsValue } from '@/scripts/calculate-products-value'
+import { Product } from '@/api/controllers/product'
 const ProductContainer = () => {
   const [products, setProducts] = useState([])
 
@@ -25,10 +28,14 @@ const ProductContainer = () => {
     }
   }, [])
 
+  useEffect(() => {
+    calculateProductsValue()
+  }, [])
+
   return (
     <S.Wrapper>
-      {products.map((product, index) => (
-        <ProductCard key={index} props={product} />
+      {products.map((product: Product, index) => (
+        <ProductBox url={product.productUrl} method="amazon" />
       ))}
     </S.Wrapper>
   )

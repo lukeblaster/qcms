@@ -13,6 +13,7 @@ export const ContentContainer = styled(Container)`
   flex-direction: column;
   align-items: center;
   justify-content: normal;
+  width: 100%;
   gap: 20px;
 `
 
@@ -20,6 +21,8 @@ export const Div = styled.div<{ $column?: boolean }>`
   display: flex;
   flex-direction: ${(props) => (props.$column ? 'column' : 'row')};
   width: 100%;
+  justify-content: center;
+  align-items: center;
 `
 
 export const SearchBoxContainer = styled(Div)`

@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom'
 import { Product } from '../controllers/product'
 import { v4 as v4uuid } from 'uuid'
 
-export async function getProductInfo(url: any) {
+export async function getAmazonProductInfo(url: any) {
   try {
     const body = await axios.get(url)
     const response = body.status
