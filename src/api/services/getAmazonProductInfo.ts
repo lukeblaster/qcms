@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { JSDOM } from 'jsdom'
-import { Product } from '../controllers/product'
+import { ProductType } from '../controllers/product'
 import { v4 as v4uuid } from 'uuid'
 
 export async function getAmazonProductInfo(url: any) {
@@ -43,7 +43,7 @@ export async function getAmazonProductInfo(url: any) {
         ?.getAttribute('src') ||
       'https://comicbook.com/wp-content/uploads/sites/4/2023/04/1dc82894-8d8d-49ea-9d1e-f7a63e95a2d5.jpg'
 
-    const data: Product = {
+    const data: ProductType = {
       id: id,
       name: productTitle,
       price: price,

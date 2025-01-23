@@ -1,7 +1,8 @@
 'use client'
 import { getProductInfo } from '../services/getProductInfo'
+import { v4 as v4uuid } from 'uuid'
 
-export type Product = {
+export type ProductType = {
   id: string
   name: string
   price: number
@@ -10,13 +11,16 @@ export type Product = {
 }
 
 export const addProduct = async (formData: FormData) => {
-  const urlProduct = formData.get('urlProduct')
-  const product = await getProductInfo(urlProduct)
+  const id = v4uuid()
+  const productUrl = formData.get('urlProduct')
+  const product = {
+    id: id,
+    productUrl: productUrl,
+    method: 'amazon'
+  }
 
   const stringData = localStorage.getItem('products') || '[]'
   const data = JSON.parse(stringData)
-
-  console.log('-> ' + urlProduct)
 
   data.push(product)
 
@@ -32,21 +36,11 @@ export const removeProduct = async (id: string) => {
   const stringData = localStorage.getItem('products') || '[]'
   const data = JSON.parse(stringData)
 
-  const newData = data.filter((product: Product) => product.id != id)
+  const newData = data.filter((product: ProductType) => product.id != id)
   const newDataString = JSON.stringify(newData)
 
   localStorage.setItem('products', newDataString)
 
   // Disparar evento personalizado para notificar a atualização
   window.dispatchEvent(new Event('localStorageUpdated'))
-}
-
-export const fetchProductInfo = async (url: string, method: string) => {
-  if (method == 'amazon') {
-    const productInfo = await getProductInfo(url)
-
-    return productInfo
-  }
-
-  return []
 }

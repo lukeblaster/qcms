@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
-import ProductCard from '.'
+import ExternalLinkButton from '.'
 export default {
-  title: 'ProductCard',
-  component: ProductCard
+  title: 'ExternalLinkButton',
+  component: ExternalLinkButton
 } as Meta
 export const Default: StoryObj = {}

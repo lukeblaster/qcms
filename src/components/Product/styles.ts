@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   gap: 6px;
   max-width: 220px;
-  max-height: 450px;
+  height: 365px;
   border-radius: 12px;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.25);
   padding: 0px 10px;

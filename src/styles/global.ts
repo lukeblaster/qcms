@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import '@radix-ui/themes/styles.css'
 
 const GlobalStyles = createGlobalStyle`
   @font-face {

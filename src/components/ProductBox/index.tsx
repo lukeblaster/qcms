@@ -1,19 +1,24 @@
-import { fetchProductInfo } from '@/api/controllers/product'
-import ProductCard from '../ProductCard'
+'use server'
+import { fetchProductInfo } from '@/api/controllers/productInfo'
+import Product from '../Product'
 import * as S from './styles'
+import { Suspense } from 'react'
+import ProductSkeleton from '../ProductSkeleton'
 
 interface ProductBoxProps {
   url: string
   method: string
 }
 
-const ProductBox = ({ url, method }: ProductBoxProps) => {
+const ProductBox = async ({ url, method }: ProductBoxProps) => {
   const productPromise = fetchProductInfo(url, method)
 
   return (
-    <S.Wrapper>
-      <ProductCard productPromise={productPromise} />
-    </S.Wrapper>
+    <S.ProductBoxWrapper>
+      <Suspense fallback={<ProductSkeleton />}>
+        <Product productPromise={productPromise} />
+      </Suspense>
+    </S.ProductBoxWrapper>
   )
 }
 export default ProductBox

@@ -1,4 +1,6 @@
 'use client'
 
 import styled from 'styled-components'
-export const Wrapper = styled.main``
+export const ProductBoxWrapper = styled.main`
+  height: 365px;
+`
