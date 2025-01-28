@@ -1,22 +1,22 @@
 'use client'
 
-import styled from 'styled-components'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
-import '@radix-ui/colors/black-alpha.css'
-import '@radix-ui/colors/mauve.css'
-import '@radix-ui/colors/red.css'
-import '@radix-ui/colors/violet.css'
+import styled from 'styled-components'
+export const Wrapper = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: normal;
+  margin: 5px;
+  width: 100%;
+  height: 100%;
+`
 
-export const RemoveProductIcon = styled.span`
-  width: 24px;
-  height: 24px;
-  color: red;
+export const Warning = styled.p`
+  font-size: small;
+  font-weight: 600;
+  text-decoration: underline;
   cursor: pointer;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 `
 
 export const Overlay = styled(AlertDialog.Overlay)`
@@ -25,20 +25,7 @@ export const Overlay = styled(AlertDialog.Overlay)`
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 `
-export const IconContainer = styled.div`
-  border: solid 3px ${(props) => props.theme.colors.red};
-  border-radius: 50%;
-  height: 15vh;
-  width: 15vh;
-  padding: 10px;
-  margin-bottom: 20px;
-  svg {
-    width: 100%;
-    height: 100%;
-    color: ${(props) => props.theme.colors.red};
-    stroke-width: 1px;
-  }
-`
+
 export const ActionsContainer = styled.div`
   display: flex;
 `
@@ -65,37 +52,54 @@ export const DialogContent = styled(AlertDialog.Content)`
     outline: none;
   }
 `
+export const SitesContainer = styled.div`
+  font-size: medium;
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+
+  flex-direction: column;
+  margin: 20px;
+
+  li {
+    list-style-type: none;
+    margin: 3px 0px;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 280px;
+  }
+`
+
 export const DialogTitle = styled(AlertDialog.Title)`
   font-size: large;
+  margin-bottom: 5px;
 `
 
 export const DialogDescription = styled(AlertDialog.Description)`
-  font-size: small;
+  font-size: medium;
   color: ${(props) => props.theme.colors.neutral};
-  margin-bottom: 15px;
-`
 
-export const DialogCancel = styled(AlertDialog.Cancel)`
-  all: unset;
-  cursor: pointer;
-  padding: 8px 20px;
-  font-size: small;
+  @media (max-width: 768px) {
+    font-size: medium;
+    text-align: center;
+  }
 `
 
 export const DialogAction = styled(AlertDialog.Action)`
   all: unset;
   cursor: pointer;
   padding: 8px 20px;
-  font-size: small;
+  font-size: medium;
   color: ${(props) => props.theme.colors.white};
-  background-color: ${(props) => props.theme.colors.red};
+  background-color: ${(props) => props.theme.colors.secondaryColor};
   border-radius: 12px;
   transition: all;
 
   &:hover {
-    color: ${(props) => props.theme.colors.red};
+    color: ${(props) => props.theme.colors.secondaryColor};
     background-color: ${(props) => props.theme.colors.white};
-    border: solid 2px ${(props) => props.theme.colors.red};
+    border: solid 2px ${(props) => props.theme.colors.secondaryColor};
     padding: 6px 18px;
   }
 `
