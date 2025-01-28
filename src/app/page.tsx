@@ -1,9 +1,11 @@
-import Main from '@/components/Main'
-import ProductCard from '@/components/ProductCard'
+'use client'
 import * as S from './styles'
 import { PlusCircle } from 'lucide'
-import { useRenderIconFromNode } from '@/hooks/useRenderIconFromNode'
-import ProductContainer from '@/components/ProductContainer'
+import ProductsList from '@/components/ProductsList'
+import Button from '@/components/Button'
+import { addProduct } from '@/api/controllers/product/product'
+import Form from 'next/form'
+import FinalPrice from '@/components/FinalPrice'
 
 export default function Home() {
   return (
@@ -14,28 +16,25 @@ export default function Home() {
         </S.Title>
 
         <S.Div $column>
-          <S.SearchBoxContainer>
-            <S.SearchInput
-              type="text"
-              placeholder="Digite ou cole o link do produto"
-            />
-            <S.AddButton>
-              {useRenderIconFromNode(PlusCircle)}Adicionar
-            </S.AddButton>
-          </S.SearchBoxContainer>
-          <S.Warning>Sites suportados: Kabum, Amazon, Pichau</S.Warning>
+          <Form action={addProduct} style={{ width: '100%' }}>
+            <S.SearchBoxContainer>
+              <S.SearchInput
+                type="text"
+                name="urlProduct"
+                placeholder="Digite ou cole o link do produto"
+                required
+              />
+              <Button icon={PlusCircle} text="Adicionar" />
+            </S.SearchBoxContainer>
+          </Form>
         </S.Div>
 
-        <ProductContainer>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </ProductContainer>
+        <FinalPrice />
+
+        <ProductsList />
 
         <S.ContentContainer>
-          <S.Title>Total: R$ 9.999,60</S.Title>
+          <S.Warning>Sites suportados</S.Warning>
         </S.ContentContainer>
       </S.ContentContainer>
     </S.Container>
