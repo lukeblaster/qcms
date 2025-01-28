@@ -1,10 +1,9 @@
-import ProductCard from '@/components/Product'
+'use client'
 import * as S from './styles'
 import { PlusCircle } from 'lucide'
-import { useRenderIconFromNode } from '@/hooks/useRenderIconFromNode'
 import ProductsList from '@/components/ProductsList'
 import Button from '@/components/Button'
-import { addProduct } from '@/api/controllers/product'
+import { addProduct } from '@/api/controllers/product/product'
 import Form from 'next/form'
 import FinalPrice from '@/components/FinalPrice'
 
@@ -25,17 +24,17 @@ export default function Home() {
                 placeholder="Digite ou cole o link do produto"
                 required
               />
-              <Button>{useRenderIconFromNode(PlusCircle)} Adicionar</Button>
+              <Button icon={PlusCircle} text="Adicionar" />
             </S.SearchBoxContainer>
           </Form>
-          <S.Warning>Sites suportados: Amazon</S.Warning>
         </S.Div>
+
+        <FinalPrice />
 
         <ProductsList />
 
         <S.ContentContainer>
-          <S.Title>Total</S.Title>
-          <FinalPrice />
+          <S.Warning>Sites suportados</S.Warning>
         </S.ContentContainer>
       </S.ContentContainer>
     </S.Container>

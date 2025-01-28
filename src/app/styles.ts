@@ -1,20 +1,22 @@
 'use client'
 
-import Button from '@/components/Button'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: auto;
 `
-export const ContentContainer = styled(Container)`
-  margin: 5%;
+export const ContentContainer = styled.div`
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: normal;
+  margin: 5px;
   width: 100%;
-  gap: 20px;
+  height: 100%;
+  gap: 10px;
 `
 
 export const Div = styled.div<{ $column?: boolean }>`
@@ -27,15 +29,23 @@ export const Div = styled.div<{ $column?: boolean }>`
 
 export const SearchBoxContainer = styled(Div)`
   gap: 10px;
+
+  @media (max-width: 768px) {
+    gap: 5px;
+  }
 `
 
 export const Title = styled.h1`
   font-size: xx-large;
-  color: #00b2f3;
+  color: ${(props) => props.theme.colors.secondaryColor};
+
+  @media (max-width: 768px) {
+    font-size: x-large;
+  }
 `
 
 export const TitleDetail = styled.span`
-  color: #f3cf00;
+  color: ${(props) => props.theme.colors.secondaryColor};
 `
 
 export const SearchInput = styled.input`
@@ -53,28 +63,9 @@ export const SearchInput = styled.input`
   }
 `
 
-export const AddButton = styled(Button)`
-  padding: 13px;
-  width: 50%;
-  max-width: 160px;
-  background-color: #00b2f3;
-  border: none;
-  border-radius: 12px;
-  color: #ffffff;
-  font-size: medium;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgb(61, 191, 238);
-  }
-`
-
 export const Warning = styled.p`
   font-size: small;
   font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
 `

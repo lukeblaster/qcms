@@ -1,16 +1,16 @@
 'use client'
-
-import { Product } from '@/api/controllers/product'
+import { manageLocalStorage } from '@/hooks/manageLocalStorage'
 
 export async function calculateProductsValue() {
-  const stringData = localStorage.getItem('products') || '[]'
-  const data = await JSON.parse(stringData)
+  const prices = manageLocalStorage({ method: 'get', key: 'prices' })
 
   const initialValue = 0
-  const productsValue = data.reduce(
-    (acc, current) => acc + current.price,
+  const productsValue = prices.reduce(
+    (acc, current) => acc + current,
     initialValue
   )
+
+  console.log(productsValue)
 
   return productsValue
 }

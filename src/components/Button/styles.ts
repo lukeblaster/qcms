@@ -5,7 +5,7 @@ export const Button = styled.button`
   padding: 13px;
   width: 50%;
   max-width: 160px;
-  background-color: #00b2f3;
+  background-color: ${(props) => props.theme.colors.secondaryColor};
   border: none;
   border-radius: 12px;
   color: #ffffff;
@@ -18,6 +18,23 @@ export const Button = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: rgb(61, 191, 238);
+    background-color: ${(props) => props.theme.colors.blueHoverColor};
+  }
+
+  @media (max-width: 768px) {
+    width: auto;
+    svg {
+      color: #ffffff;
+    }
+  }
+`
+
+export const ButtonText = styled.span`
+  @media (max-width: 768px) {
+    display: none;
+
+    svg {
+      color: #ffffff;
+    }
   }
 `

@@ -1,26 +1,47 @@
 'use client'
-import { ProductType } from '@/api/controllers/product'
+import { ProductType } from '@/api/controllers/fetchProductInfo'
 
 interface manageLocalStorageProps {
   method: string
-  product?: ProductType
+  key: string
+  value?: any
 }
 
 export const manageLocalStorage = ({
   method,
-  product
+  key,
+  value
 }: manageLocalStorageProps) => {
   if (method == 'set') {
-    const products = JSON.parse(localStorage.getItem('products') || '[]')
+    const data = JSON.parse(localStorage.getItem(key) || '[]')
 
-    products.push(product)
+    data.push(value)
 
-    localStorage.setItem('products', products)
+    localStorage.setItem(key, JSON.stringify(data))
+
+    return
+  }
+  if (method == 'push') {
+    const data = JSON.parse(localStorage.getItem(key) || '[]')
+
+    data.push(value)
+
+    localStorage.setItem(key, JSON.stringify(data))
+
+    return
+  }
+  if (method == 'removeAll') {
+    localStorage.removeItem(key)
+
+    return
+  }
+  if (method == 'update') {
+    localStorage.setItem(key, JSON.stringify(value))
 
     return
   }
 
-  const products = JSON.parse(localStorage.getItem('products') || '[]')
+  const products = JSON.parse(localStorage.getItem(key) || '[]')
 
   return products
 }

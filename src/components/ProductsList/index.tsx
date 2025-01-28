@@ -1,30 +1,73 @@
-'use server'
+'use client'
 import * as S from './styles'
-import { calculateProductsValue } from '@/scripts/calculate-products-value'
+import { useEffect, useState } from 'react'
 import Product from '../Product'
-import { Suspense } from 'react'
-import ProductSkeleton from '../ProductSkeleton'
+import { manageLocalStorage } from '@/hooks/manageLocalStorage'
+import {
+  fetchProductInfo,
+  ProductType
+} from '@/api/controllers/product/fetchProductInfo'
 
 const ProductsList = () => {
-  const productsStorage = [
-    {
-      url: 'https://a.co/d/dxI5teq',
-      method: 'amazon'
-    },
-    {
-      url: 'https://a.co/d/51epsF1',
-      method: 'amazon'
-    }
-  ]
+  const [products, setProducts] = useState<ProductType[]>([])
+  const [productsData, setProductsData] = useState<ProductType[]>([])
 
-  // localStorage.setItem('products', JSON.stringify(productsStorage))
+  function updateProductsList() {
+    const data = manageLocalStorage({ method: 'get', key: 'products' })
+
+    window.dispatchEvent(new Event('pricesUpdated'))
+    setProducts(data)
+  }
+
+  useEffect(() => {
+    manageLocalStorage({
+      method: 'removeAll',
+      key: 'prices'
+    })
+    updateProductsList()
+
+    const handleStorageChange = () => updateProductsList()
+    window.addEventListener('localStorageUpdated', handleStorageChange)
+
+    return () => {
+      window.removeEventListener('localStorageUpdated', handleStorageChange)
+    }
+  }, [])
+
+  useEffect(() => {
+    async function fetchProductData() {
+      const productData = await Promise.all(
+        products.map(async (product) => {
+          const data = await fetchProductInfo(
+            product.productUrl,
+            product.method
+          )
+          return {
+            ...data,
+            name: data.name,
+            price: data.price,
+            productUrl: data.productUrl,
+            imageUrl: data.imageUrl
+          }
+        })
+      )
+
+      console.log('productData ->' + productData)
+
+      setProductsData(productData)
+    }
+
+    fetchProductData()
+  }, [products])
 
   return (
     <S.Wrapper>
-      {productsStorage.map((product, index) => (
-        <Suspense fallback={<ProductSkeleton />}>
-          <Product url={product.url} method="amazon" />
-        </Suspense>
+      {products.map((p, index) => (
+        <Product
+          key={index}
+          productIndex={index.toString()}
+          productData={productsData[index]}
+        />
       ))}
     </S.Wrapper>
   )

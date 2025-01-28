@@ -6,31 +6,35 @@ import { calculateProductsValue } from '@/scripts/calculate-products-value'
 const FinalPrice = () => {
   const [finalPrice, setFinalPrice] = useState(0)
 
-  async function getProductsValue() {
-    const result = await calculateProductsValue()
-
-    setFinalPrice(result)
-  }
-
   useEffect(() => {
+    async function getProductsValue() {
+      const result = await calculateProductsValue()
+
+      setFinalPrice(result)
+    }
+
     getProductsValue()
 
     // Adiciona um ouvinte para detectar mudanças no localStorage
-    const handleStorageChange = () => getProductsValue()
-    window.addEventListener('localStorageUpdated', handleStorageChange)
+    window.addEventListener('pricesUpdated', getProductsValue)
 
     return () => {
-      window.removeEventListener('localStorageUpdated', handleStorageChange)
+      window.removeEventListener('pricesUpdated', getProductsValue)
     }
   }, [])
 
   return (
-    <S.Title>
-      {finalPrice.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      })}
-    </S.Title>
+    <S.Wrapper>
+      <S.Price>
+        Valor total
+        <S.PriceDetail>
+          {finalPrice.toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+          })}
+        </S.PriceDetail>
+      </S.Price>
+    </S.Wrapper>
   )
 }
 export default FinalPrice

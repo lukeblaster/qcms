@@ -10,6 +10,11 @@ export const Wrapper = styled.div`
   border-radius: 12px;
   box-shadow: 1px 4px 5px rgba(0, 0, 0, 0.25);
   padding: 0px 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 300px;
+    max-width: 180px;
+  }
 `
 export const ImageWrapper = styled(Wrapper)`
   box-shadow: none;
@@ -27,6 +32,11 @@ export const Image = styled.img`
   width: 220px;
   height: 220px;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    height: 100%;
+    max-height: 140px;
+  }
 `
 export const TitleContainer = styled.div`
   display: flex;

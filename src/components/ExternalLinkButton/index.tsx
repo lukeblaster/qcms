@@ -1,3 +1,4 @@
+'use client'
 import * as S from './styles'
 import { ExternalLink } from 'lucide'
 import { useRenderIconFromNode } from '@/hooks/useRenderIconFromNode'

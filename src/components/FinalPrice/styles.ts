@@ -1,8 +1,20 @@
 'use client'
 
 import styled from 'styled-components'
-export const Title = styled.h1`
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Price = styled.h2`
+  font-size: x-large;
+  text-align: center;
+`
+export const PriceDetail = styled.p`
   font-size: xx-large;
-  /* color: #00b2f3; */
-  color: #f3cf00;
+  color: ${(props) => props.theme.colors.primaryColor};
+  text-align: center;
 `

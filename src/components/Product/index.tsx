@@ -1,20 +1,46 @@
-'use server'
-import React from 'react'
+'use client'
 import * as S from './styles'
 
-import { ProductType } from '@/api/controllers/product'
 import RemoveProductButton from '../RemoveProductButton'
 import ExternalLinkButton from '../ExternalLinkButton'
-import { fetchProductInfo } from '@/api/controllers/productInfo'
+import { ProductType } from '@/api/controllers/product/fetchProductInfo'
+import ProductSkeleton from '../ProductSkeleton'
+import { manageLocalStorage } from '@/hooks/manageLocalStorage'
+import { useEffect, useState } from 'react'
 
 interface ProductProps {
-  url: string
-  method: string
+  productIndex: string
+  productData: ProductType
 }
 
-const Product = async ({ url, method }: ProductProps) => {
-  const product: ProductType = await fetchProductInfo(url, method)
-  const formattedPrice = product.price.toLocaleString('pt-BR', {
+const Product = ({ productIndex, productData }: ProductProps) => {
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (productData) {
+      manageLocalStorage({
+        method: 'push',
+        key: 'prices',
+        value: productData.price
+      })
+
+      window.dispatchEvent(new Event('pricesUpdated'))
+    }
+
+    setLoading(true)
+
+    return () => {
+      manageLocalStorage({
+        method: 'removeAll',
+        key: 'prices'
+      })
+      setLoading(false)
+    }
+  }, [productData])
+
+  if (!loading || !productData) return <ProductSkeleton />
+
+  const formattedPrice = productData.price.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL'
   })
@@ -22,19 +48,22 @@ const Product = async ({ url, method }: ProductProps) => {
   return (
     <S.Wrapper>
       <S.ImageWrapper>
-        <S.Image src={product.imageUrl} />
+        <S.Image src={productData.imageUrl} />
       </S.ImageWrapper>
-      <S.TitleContainer>
-        <S.Title>{product.name}</S.Title>
-      </S.TitleContainer>
-      <S.ProductPrice>{formattedPrice}</S.ProductPrice>
-      <S.DetailsWrapper>
-        <S.Link href={product.productUrl} target="_blank">
-          Visitar site
-          <ExternalLinkButton />
-        </S.Link>
-        <RemoveProductButton />
-      </S.DetailsWrapper>
+
+      <S.ContentContainer>
+        <S.TitleContainer>
+          <S.Title>{productData.name}</S.Title>
+        </S.TitleContainer>
+        <S.ProductPrice>{formattedPrice}</S.ProductPrice>
+        <S.DetailsWrapper>
+          <S.Link href={productData.productUrl} target="_blank">
+            Visitar site
+            <ExternalLinkButton />
+          </S.Link>
+          <RemoveProductButton productId={productIndex} />
+        </S.DetailsWrapper>
+      </S.ContentContainer>
     </S.Wrapper>
   )
 }
