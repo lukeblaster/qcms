@@ -6,6 +6,7 @@ import Button from '@/components/Button'
 import { addProduct } from '@/api/controllers/product/product'
 import Form from 'next/form'
 import FinalPrice from '@/components/FinalPrice'
+import SupportedSitesModal from '@/components/SupportedSitesModal'
 
 export default function Home() {
   return (
@@ -33,9 +34,7 @@ export default function Home() {
 
         <ProductsList />
 
-        <S.ContentContainer>
-          <S.Warning>Sites suportados</S.Warning>
-        </S.ContentContainer>
+        <SupportedSitesModal />
       </S.ContentContainer>
     </S.Container>
   )
