@@ -10,7 +10,10 @@ export function Providers({ children }: PropsWithChildren) {
     colors: {
       primaryColor: '#f3cf00',
       secondaryColor: '#007ee4',
-      blueHoverColor: '#008cff'
+      blueHoverColor: '#008cff',
+      red: '#f12424',
+      neutral: '#727272',
+      white: '#fff'
     }
   }
 
