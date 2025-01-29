@@ -20,6 +20,8 @@ const SupportedSitesModal = () => {
               <ul>
                 <li>🚀 Amazon</li>
                 <li>🚀 Kabum</li>
+                <li>🚀 Magazine Luiza</li>
+                <li>🚀 Mercado Livre</li>
               </ul>
             </S.SitesContainer>
             <S.ActionsContainer>
