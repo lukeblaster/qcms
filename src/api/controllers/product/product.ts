@@ -40,7 +40,8 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Mercado Livre
-  if (url?.includes('https://www.mercadolivre.com.br')) {
+  if (url?.includes('https://www.mercadolivre.com.br') ||
+    url?.includes('https://produto.mercadolivre.com.br')) {
     console.log('Produto Mercado Livre')
     const product = {
       productUrl: productUrl,
