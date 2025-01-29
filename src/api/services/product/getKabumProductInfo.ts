@@ -14,7 +14,16 @@ const defaultProduct = {
 
 export async function getKabumProductInfo(url: any) {
   try {
-    const body = await axios.get(url)
+    const body = await axios.get(url, {
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept-Language': 'pt-BR,pt;q=0.9',
+        Referer: 'https://www.kabum.com.br/',
+        'Cache-Control': 'no-cache',
+        Pragma: 'no-cache'
+      }
+    })
     const dom = new JSDOM(body.data)
 
     // Preço do Produto
