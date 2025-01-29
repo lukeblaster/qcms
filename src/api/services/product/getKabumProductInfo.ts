@@ -5,47 +5,53 @@ import { JSDOM } from 'jsdom'
 import { ProductType } from '../../controllers/product/fetchProductInfo'
 
 const defaultProduct = {
-  name: '',
+  name: 'Produto não disponível',
   price: 0,
-  productUrl: '',
-  imageUrl: ''
+  productUrl: '#',
+  imageUrl:
+    'https://preview.redd.it/x37wd2mzh6n31.png?width=1080&crop=smart&auto=webp&s=d6791e70211c04a331cd14c9ce88ad6a1193f23d'
 }
 
 export async function getKabumProductInfo(url: any) {
-  const body = await axios.get(url)
-  const dom = new JSDOM(body.data)
+  try {
+    const body = await axios.get(url)
+    const dom = new JSDOM(body.data)
 
-  // Preço do Produto
-  const rawPrice =
-    dom.window.document
-      .querySelector('.finalPrice')
-      ?.textContent?.replace('.', '')
-      .replace(',', '.')
-      .replace('R$', '')
-      .replace('&nbsp', '') || '0'
+    // Preço do Produto
+    const rawPrice =
+      dom.window.document
+        .querySelector('.finalPrice')
+        ?.textContent?.replace('.', '')
+        .replace(',', '.')
+        .replace('R$', '')
+        .replace('&nbsp', '') || '0'
 
-  const price = +rawPrice
+    const price = +rawPrice || 0
 
-  // Título do Produto
-  const productTitle =
-    dom.window.document.querySelector('.brTtKt')?.textContent ||
-    'Título não disponível'
+    // Título do Produto
+    const productTitle =
+      dom.window.document.querySelector('.brTtKt')?.textContent ||
+      'Produto não disponível'
 
-  // Imagem do Produto
-  const imageURL =
-    dom.window.document
-      .querySelector('.selectedImage')
-      ?.firstElementChild?.firstElementChild?.firstElementChild?.getAttribute(
-        'src'
-      ) ||
-    'https://comicbook.com/wp-content/uploads/sites/4/2023/04/1dc82894-8d8d-49ea-9d1e-f7a63e95a2d5.jpg'
+    // Imagem do Produto
+    const imageURL =
+      dom.window.document
+        .querySelector('.selectedImage')
+        ?.firstElementChild?.firstElementChild?.firstElementChild?.getAttribute(
+          'src'
+        ) ||
+      'https://preview.redd.it/x37wd2mzh6n31.png?width=1080&crop=smart&auto=webp&s=d6791e70211c04a331cd14c9ce88ad6a1193f23d'
 
-  const data: ProductType = {
-    name: productTitle,
-    price: price,
-    productUrl: url,
-    imageUrl: imageURL
+    const data: ProductType = {
+      name: productTitle,
+      price: price,
+      productUrl: url,
+      imageUrl: imageURL
+    }
+
+    return data || defaultProduct
+  } catch (error) {
+    console.warn(error)
+    return defaultProduct
   }
-
-  return data || defaultProduct
 }

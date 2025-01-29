@@ -15,11 +15,11 @@ const convertAttributes = (attrs: any) => {
 }
 
 // Renderizar o IconNode como JSX
-export const useRenderIconFromNode = (iconNode: any) => {
+export const renderIconFromNode = (iconNode: any) => {
   const [tag, attrs, children] = iconNode
   return React.createElement(
     tag,
     convertAttributes(attrs), // Converter atributos para camelCase
-    ...(children?.map((child: any) => useRenderIconFromNode(child)) || [])
+    ...(children?.map((child: any) => renderIconFromNode(child)) || [])
   )
 }
