@@ -1,5 +1,4 @@
 'use client'
-import { ProductType } from '@/api/controllers/fetchProductInfo'
 
 interface manageLocalStorageProps {
   method: string

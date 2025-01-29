@@ -3,21 +3,19 @@ import { useState } from 'react'
 import { Trash2, XCircle } from 'lucide'
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import * as S from './styles'
-import { useRenderIconFromNode } from '@/hooks/useRenderIconFromNode'
+import { renderIconFromNode } from '@/hooks/renderIconFromNode'
 import { removeProduct } from '@/api/controllers/product/product'
 const RemoveProductButton = ({ productId }: { productId: string }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   return (
     <AlertDialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <AlertDialog.Trigger asChild>
-        <S.RemoveProductIcon>
-          {useRenderIconFromNode(XCircle)}
-        </S.RemoveProductIcon>
+        <S.RemoveProductIcon>{renderIconFromNode(XCircle)}</S.RemoveProductIcon>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <S.Overlay onClick={() => setIsDialogOpen(false)} />
         <S.DialogContent>
-          <S.IconContainer>{useRenderIconFromNode(Trash2)}</S.IconContainer>
+          <S.IconContainer>{renderIconFromNode(Trash2)}</S.IconContainer>
           <S.DialogTitle>Deseja excluir o produto?</S.DialogTitle>
           <S.DialogDescription>
             Esta ação não pode ser revertida

@@ -1,12 +1,12 @@
 'use client'
 
 import { IconNode } from 'lucide'
-import { useRenderIconFromNode } from '@/hooks/useRenderIconFromNode'
+import { renderIconFromNode } from '@/hooks/renderIconFromNode'
 import * as S from './styles'
 
-const Button = ({ icon, text }: { icon: IconNode; text: String }) => (
+const Button = ({ icon, text }: { icon: IconNode; text: string }) => (
   <S.Button>
-    {useRenderIconFromNode(icon)} <S.ButtonText>{text}</S.ButtonText>
+    {renderIconFromNode(icon)} <S.ButtonText>{text}</S.ButtonText>
   </S.Button>
 )
 export default Button
