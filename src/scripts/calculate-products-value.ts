@@ -6,11 +6,9 @@ export async function calculateProductsValue() {
 
   const initialValue = 0
   const productsValue = prices.reduce(
-    (acc, current) => acc + current,
+    (acc: number, current: number) => acc + current,
     initialValue
   )
-
-  console.log(productsValue)
 
   return productsValue
 }

@@ -37,7 +37,7 @@ const ProductsList = () => {
   useEffect(() => {
     async function fetchProductData() {
       const productData = await Promise.all(
-        products.map(async (product) => {
+        products.map(async (product: any) => {
           const data = await fetchProductInfo(
             product.productUrl,
             product.method
