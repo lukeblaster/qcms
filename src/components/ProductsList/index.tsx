@@ -52,8 +52,6 @@ const ProductsList = () => {
         })
       )
 
-      console.log('productData ->' + productData)
-
       setProductsData(productData)
     }
 

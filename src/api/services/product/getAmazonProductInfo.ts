@@ -5,53 +5,59 @@ import { JSDOM } from 'jsdom'
 import { ProductType } from '../../controllers/product/fetchProductInfo'
 
 const defaultProduct = {
-  name: '',
+  name: 'Produto não disponível',
   price: 0,
-  productUrl: '',
-  imageUrl: ''
+  productUrl: '#',
+  imageUrl:
+    'https://preview.redd.it/x37wd2mzh6n31.png?width=1080&crop=smart&auto=webp&s=d6791e70211c04a331cd14c9ce88ad6a1193f23d'
 }
 
 export async function getAmazonProductInfo(url: any) {
-  const body = await axios.get(url)
-  const dom = new JSDOM(body.data)
+  try {
+    const body = await axios.get(url)
+    const dom = new JSDOM(body.data)
 
-  // Preço do Produto
-  const priceWholeString =
-    dom.window.document
-      .querySelector('.a-price-whole')
-      ?.textContent?.replace(',', '')
-      .replace('.', '') || '0'
+    // Preço do Produto
+    const priceWholeString =
+      dom.window.document
+        .querySelector('.a-price-whole')
+        ?.textContent?.replace(',', '')
+        .replace('.', '') || '0'
 
-  const priceDecimalString =
-    dom.window.document
-      .querySelector('.a-price-decimal')
-      ?.textContent?.replace(',', '.') || '.'
+    const priceDecimalString =
+      dom.window.document
+        .querySelector('.a-price-decimal')
+        ?.textContent?.replace(',', '.') || '.'
 
-  const priceFractionString =
-    dom.window.document.querySelector('.a-price-fraction')?.textContent || '0'
+    const priceFractionString =
+      dom.window.document.querySelector('.a-price-fraction')?.textContent || '0'
 
-  const rawPrice = priceWholeString + priceDecimalString + priceFractionString
-  const price = +rawPrice
+    const rawPrice = priceWholeString + priceDecimalString + priceFractionString
+    const price = +rawPrice || 0
 
-  // Título do Produto
+    // Título do Produto
 
-  const productTitle =
-    dom.window.document.querySelector('#productTitle')?.textContent ||
-    'Título não disponível'
+    const productTitle =
+      dom.window.document.querySelector('#productTitle')?.textContent ||
+      'Produto não disponível'
 
-  // Imagem do Produto
-  const imageURL =
-    dom.window.document
-      .querySelector('.a-dynamic-image')
-      ?.getAttribute('src') ||
-    'https://comicbook.com/wp-content/uploads/sites/4/2023/04/1dc82894-8d8d-49ea-9d1e-f7a63e95a2d5.jpg'
+    // Imagem do Produto
+    const imageURL =
+      dom.window.document
+        .querySelector('.a-dynamic-image')
+        ?.getAttribute('src') ||
+      'https://preview.redd.it/x37wd2mzh6n31.png?width=1080&crop=smart&auto=webp&s=d6791e70211c04a331cd14c9ce88ad6a1193f23d'
 
-  const data: ProductType = {
-    name: productTitle,
-    price: price,
-    productUrl: url,
-    imageUrl: imageURL
+    const data: ProductType = {
+      name: productTitle,
+      price: price,
+      productUrl: url,
+      imageUrl: imageURL
+    }
+
+    return data || defaultProduct
+  } catch (error) {
+    console.warn(error)
+    return defaultProduct
   }
-
-  return data || defaultProduct
 }
