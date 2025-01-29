@@ -7,6 +7,7 @@ import { addProduct } from '@/api/controllers/product/product'
 import Form from 'next/form'
 import FinalPrice from '@/components/FinalPrice'
 import SupportedSitesModal from '@/components/SupportedSitesModal'
+import DonationModal from '@/components/DonationModal'
 
 export default function Home() {
   return (
@@ -34,7 +35,10 @@ export default function Home() {
 
         <ProductsList />
 
-        <SupportedSitesModal />
+        <S.Div>
+          <DonationModal /> &nbsp;|&nbsp;
+          <SupportedSitesModal />
+        </S.Div>
       </S.ContentContainer>
     </S.Container>
   )
