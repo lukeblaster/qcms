@@ -1,5 +1,6 @@
 import { getAmazonProductInfo } from '@/api/services/product/getAmazonProductInfo'
 import { getKabumProductInfo } from '@/api/services/product/getKabumProductInfo'
+import { getMagazineLuizaProductInfo } from '@/api/services/product/getMagazineLuizaProductInfo'
 import { getMercadoLivreProductInfo } from '@/api/services/product/getMercadoLivreProductInfo'
 
 export type ProductType = {
@@ -17,6 +18,11 @@ export const fetchProductInfo = async (url: string, method: string) => {
 
   if (method == 'mercado-livre') {
     const productInfo = await getMercadoLivreProductInfo(url)
+    return productInfo
+  }
+
+  if (method == 'magazine-luiza') {
+    const productInfo = await getMagazineLuizaProductInfo(url)
     return productInfo
   }
 

@@ -7,7 +7,10 @@ export const addProduct = (formData: FormData) => {
   const url = productUrl?.toString()
 
   // Amazon
-  if (url?.includes('amazon') || url?.includes('a.co')) {
+  if (
+    url?.includes('https://amazon.com.br') ||
+    url?.includes('https://a.co/d/')
+  ) {
     console.log('Produto Amazon')
     const product = {
       productUrl: productUrl,
@@ -22,7 +25,7 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Kabum
-  if (url?.includes('kabum.com.br')) {
+  if (url?.includes('https://kabum.com.br')) {
     console.log('Produto Kabum')
     const product = {
       productUrl: productUrl,
@@ -37,7 +40,7 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Mercado Livre
-  if (url?.includes('mercadolivre.com.br')) {
+  if (url?.includes('https://mercadolivre.com.br')) {
     console.log('Produto Mercado Livre')
     const product = {
       productUrl: productUrl,
@@ -51,12 +54,12 @@ export const addProduct = (formData: FormData) => {
     return
   }
 
-  // Americanas
-  if (url?.includes('americanas.com.br')) {
-    console.log('Produto Americanas')
+  // Magazine Luiza
+  if (url?.includes('https://magazineluiza.com.br')) {
+    console.log('Produto Magazine Luiza')
     const product = {
       productUrl: productUrl,
-      method: 'americanas'
+      method: 'magazine-luiza'
     }
 
     manageLocalStorage({ method: 'set', key: 'products', value: product })
