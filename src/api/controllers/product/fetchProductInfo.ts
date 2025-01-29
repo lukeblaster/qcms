@@ -9,15 +9,11 @@ export type ProductType = {
 }
 
 export const fetchProductInfo = async (url: string, method: string) => {
-  if (method == 'amazon') {
-    const productInfo = await getAmazonProductInfo(url)
-    return productInfo
-  }
-
   if (method == 'kabum') {
     const productInfo = await getKabumProductInfo(url)
     return productInfo
   }
 
-  return
+  const productInfo = await getAmazonProductInfo(url)
+  return productInfo
 }
