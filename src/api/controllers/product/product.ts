@@ -36,6 +36,36 @@ export const addProduct = (formData: FormData) => {
     return
   }
 
+  // Mercado Livre
+  if (url?.includes('mercadolivre.com.br')) {
+    console.log('Produto Mercado Livre')
+    const product = {
+      productUrl: productUrl,
+      method: 'mercado-livre'
+    }
+
+    manageLocalStorage({ method: 'set', key: 'products', value: product })
+
+    // Disparar evento personalizado para notificar a atualização
+    window.dispatchEvent(new Event('localStorageUpdated'))
+    return
+  }
+
+  // Americanas
+  if (url?.includes('americanas.com.br')) {
+    console.log('Produto Americanas')
+    const product = {
+      productUrl: productUrl,
+      method: 'americanas'
+    }
+
+    manageLocalStorage({ method: 'set', key: 'products', value: product })
+
+    // Disparar evento personalizado para notificar a atualização
+    window.dispatchEvent(new Event('localStorageUpdated'))
+    return
+  }
+
   // Alerta sobre produtos não suportados
   alert('Produto não suportado!')
 }
