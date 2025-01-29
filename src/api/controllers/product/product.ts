@@ -8,7 +8,7 @@ export const addProduct = (formData: FormData) => {
 
   // Amazon
   if (
-    url?.includes('https://amazon.com.br') ||
+    url?.includes('https://www.amazon.com.br') ||
     url?.includes('https://a.co/d/')
   ) {
     console.log('Produto Amazon')
@@ -25,7 +25,7 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Kabum
-  if (url?.includes('https://kabum.com.br')) {
+  if (url?.includes('https://www.kabum.com.br')) {
     console.log('Produto Kabum')
     const product = {
       productUrl: productUrl,
@@ -40,7 +40,7 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Mercado Livre
-  if (url?.includes('https://mercadolivre.com.br')) {
+  if (url?.includes('https://www.mercadolivre.com.br')) {
     console.log('Produto Mercado Livre')
     const product = {
       productUrl: productUrl,
@@ -55,7 +55,7 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Magazine Luiza
-  if (url?.includes('https://magazineluiza.com.br')) {
+  if (url?.includes('https://www.magazineluiza.com.br')) {
     console.log('Produto Magazine Luiza')
     const product = {
       productUrl: productUrl,

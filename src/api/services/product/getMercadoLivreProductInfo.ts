@@ -29,24 +29,22 @@ export async function getMercadoLivreProductInfo(url: any) {
     // Preço do Produto
     const rawPrice =
       dom.window.document
-        .querySelector('.gzCGtd')
-        ?.textContent?.replace('.', '')
-        .replace(',', '.')
-        .replace('R$', '')
-        .replace('&nbsp', '') || 0
+        .querySelector('meta[itemprop="price"]')
+        ?.getAttribute('content') || 0
 
     const price = +rawPrice || 0
 
+    console.log(rawPrice)
+
     // Título do Produto
     const productTitle =
-      dom.window.document.querySelector('.jyetLr')?.textContent ||
+      dom.window.document.querySelector('.ui-pdp-title')?.textContent ||
       'Produto não disponível'
 
     // Imagem do Produto
     const imageURL =
       dom.window.document
-        .querySelector('jAziSf')
-        ?.querySelector('img')
+        .querySelector('.ui-pdp-gallery__figure__image')
         ?.getAttribute('src') ||
       'https://preview.redd.it/x37wd2mzh6n31.png?width=1080&crop=smart&auto=webp&s=d6791e70211c04a331cd14c9ce88ad6a1193f23d'
 
