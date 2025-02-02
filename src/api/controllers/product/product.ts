@@ -6,26 +6,8 @@ export const addProduct = (formData: FormData) => {
   const productUrl = formData.get('urlProduct')
   const url = productUrl?.toString()
 
-  // Amazon
-  if (
-    url?.includes('https://www.amazon.com.br') ||
-    url?.includes('https://a.co/d/')
-  ) {
-    console.log('Produto Amazon')
-    const product = {
-      productUrl: productUrl,
-      method: 'amazon'
-    }
-
-    manageLocalStorage({ method: 'set', key: 'products', value: product })
-
-    // Disparar evento personalizado para notificar a atualização
-    window.dispatchEvent(new Event('localStorageUpdated'))
-    return
-  }
-
   // Kabum
-  if (url?.includes('https://www.kabum.com.br')) {
+  if (url?.includes('kabum.com.br')) {
     console.log('Produto Kabum')
     const product = {
       productUrl: productUrl,
@@ -40,7 +22,7 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Mercado Livre
-  if (url?.includes('https://www.mercadolivre.com.br')) {
+  if (url?.includes('mercadolivre.com.br')) {
     console.log('Produto Mercado Livre')
     const product = {
       productUrl: productUrl,
@@ -55,11 +37,29 @@ export const addProduct = (formData: FormData) => {
   }
 
   // Magazine Luiza
-  if (url?.includes('https://www.magazineluiza.com.br')) {
+  if (url?.includes('magazineluiza.com.br')) {
     console.log('Produto Magazine Luiza')
     const product = {
       productUrl: productUrl,
       method: 'magazine-luiza'
+    }
+
+    manageLocalStorage({ method: 'set', key: 'products', value: product })
+
+    // Disparar evento personalizado para notificar a atualização
+    window.dispatchEvent(new Event('localStorageUpdated'))
+    return
+  }
+
+  // Amazon
+  if (
+    url?.includes('https://www.amazon.com.br') ||
+    url?.includes('https://a.co/d/')
+  ) {
+    console.log('Produto Amazon')
+    const product = {
+      productUrl: productUrl,
+      method: 'amazon'
     }
 
     manageLocalStorage({ method: 'set', key: 'products', value: product })
