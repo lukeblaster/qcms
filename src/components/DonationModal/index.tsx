@@ -7,7 +7,7 @@ const DonationModal = () => {
   return (
     <AlertDialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <AlertDialog.Trigger asChild>
-        <S.Warning>Apoie me</S.Warning>
+        <S.Warning>Apoie-me</S.Warning>
       </AlertDialog.Trigger>
       <AlertDialog.Portal>
         <S.Overlay onClick={() => setIsDialogOpen(false)} />
